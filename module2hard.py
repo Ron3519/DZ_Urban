@@ -6,7 +6,10 @@ def save_program(boss_num):
             numbers.append(i)
     
     for i in numbers:
-        for j in range(1, i // 2 ):
+        x = 1
+        if i % 2 == 0:
+            x = 0
+        for j in range(1, i // 2 + x):
             final += str(j) + str(i - j) + '  '
 
     return final
