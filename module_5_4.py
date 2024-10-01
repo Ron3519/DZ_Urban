@@ -1,5 +1,3 @@
-
-
 class House:
     houses_history = []
 
@@ -11,16 +9,12 @@ class House:
                 break
             print(i)
 
-
-    def __new__(cls, name, number_of_floors ):
-        if name != 'houses_history':
-            House.houses_history.append(name)
-        
-        return object.__new__(cls)
+    def __new__(cls, *args, **kwargs):
+        obj = object.__new__(cls)
+        cls.houses_history.append(args[0])
+        return obj
 
     def __init__(self, name, number_of_floors):
-        if name == 'houses_history':
-            self.list = []
         self.name = name
         self.number_of_floors = number_of_floors
 
@@ -72,7 +66,7 @@ class House:
         return self
 
 
-houses_history = House('houses_history',None)
+
 
 
 
