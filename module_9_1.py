@@ -1,7 +1,7 @@
 def apply_all_func(int_list, *functions):
     result = {}
     for i in functions:
-        result[i.__name__] = map(i, int_list)
+        result[i.__name__] = i(int_list)
 
     return result
 
