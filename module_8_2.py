@@ -8,11 +8,11 @@ def personal_sum(numbers):
             incorrect_data += 1
             print('Некорректный тип данных для подсчёта суммы -', i)
 
-    return result, incorrect_data
+    return (result, incorrect_data)
 
 def calculate_average(numbers):
     try:
-        q = personal_sum(numbers)[0] / len(numbers)
+        q = personal_sum(numbers)[0] / len([i for i in numbers if isinstance(i, int)])
     except ZeroDivisionError:
         return 0
     except TypeError:
