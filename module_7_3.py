@@ -1,20 +1,18 @@
 class WordsFinder:
-    all_words = []
     def __init__(self,*file_names):
         self.file_names = file_names
 
     def get_all_words(self):
         all_words = {}
         for file_name in self.file_names:
-            with open(file_name, 'r') as file:
+            with open(file_name, 'r', encoding='utf-8') as file:
                 words = ''
-                while True:
-                    string = file.readline().lower()
-                    if string == '':
+                for line in file:
+                    if line == '':
                         break
                     for i in [',', '.', '=', '!', '?', ';', ':', ' - ', '\n']:
-                        string = string.replace(i, ' ')
-                    words += string
+                        line = line.replace(i, ' ')
+                    words += line
                 all_words[file_name] = words.split()
         return all_words
 
