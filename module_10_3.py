@@ -3,30 +3,31 @@ from random import randint
 from threading import Thread, Lock
 
 class Bank:
+    balanse = 0
     def __init__(self):
-        self.balance = 0
+        self.lock = Lock()
 
     def deposit(self):
         for i in range(100):
             plus = randint(50, 500)
-            if self.balance >= 500 and Lock.locked():
-                Lock.release()
+            if self.balanse >= 500 and self.lock.locked():
+                self.lock.release()
             sleep(0.001)
             self.balanse += plus
-            print(f"Пополнение: {plus}. Баланс: {self.balance}")
+            print(f"Пополнение: {plus}. Баланс: {self.balanse}")
 
 
     def take(self):
         for i in range(100):
             minus = randint(50, 500)
             print(f"Запрос на {minus}")
-            if self.balance - minus < 0:
+            if self.balanse - minus < 0:
                 print("Запрос отклонён, недостаточно средств")
-                Lock.acquire()
+                self.lock.acquire()
             else:
                 sleep(0.001)
-                self.balance - minus
-                print(f"Снятие: {minus}. Баланс: {self.balance}")
+                self.balanse -= minus
+                print(f"Снятие: {minus}. Баланс: {self.balanse}")
 
 
 bk = Bank()
@@ -39,5 +40,3 @@ th1.start()
 th2.start()
 th1.join()
 th2.join()
-
-
