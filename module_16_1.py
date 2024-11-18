@@ -13,3 +13,7 @@ async def user(user_id : str) -> dict:
 @app.get("/")
 async def title():
     return {"message":'Главная страница'}
+
+@app.get("/user")
+async def user_info(username : str,age : int) -> dict:
+    return {"message":f"Имя: {username}, Возраст {age}"}
